@@ -1,0 +1,1277 @@
+head	1.41;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.41
+date	2000.03.06.08.26.09;	author end70;	state Exp;
+branches;
+next	1.40;
+
+1.40
+date	2000.03.03.02.39.47;	author end70;	state Exp;
+branches;
+next	1.39;
+
+1.39
+date	2000.03.03.02.34.02;	author end70;	state Exp;
+branches;
+next	1.38;
+
+1.38
+date	2000.03.03.02.32.01;	author end70;	state Exp;
+branches;
+next	1.37;
+
+1.37
+date	2000.03.03.02.29.48;	author end70;	state Exp;
+branches;
+next	1.36;
+
+1.36
+date	2000.03.03.01.24.17;	author end70;	state Exp;
+branches;
+next	1.35;
+
+1.35
+date	2000.03.03.01.23.20;	author end70;	state Exp;
+branches;
+next	1.34;
+
+1.34
+date	2000.03.03.01.13.37;	author end70;	state Exp;
+branches;
+next	1.33;
+
+1.33
+date	2000.03.03.01.06.40;	author end70;	state Exp;
+branches;
+next	1.32;
+
+1.32
+date	2000.03.03.01.06.29;	author end70;	state Exp;
+branches;
+next	1.31;
+
+1.31
+date	2000.03.02.23.40.14;	author end70;	state Exp;
+branches;
+next	1.30;
+
+1.30
+date	2000.03.02.23.39.52;	author end70;	state Exp;
+branches;
+next	1.29;
+
+1.29
+date	2000.03.02.20.05.41;	author end70;	state Exp;
+branches;
+next	1.28;
+
+1.28
+date	2000.03.02.20.03.50;	author end70;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	2000.03.02.20.03.39;	author end70;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	2000.03.02.05.33.58;	author end70;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	2000.03.02.05.32.46;	author end70;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2000.03.02.05.25.17;	author end70;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2000.03.02.05.18.36;	author end70;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2000.03.02.05.17.00;	author end70;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2000.03.02.05.16.07;	author end70;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2000.03.02.05.09.18;	author end70;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2000.03.02.05.08.12;	author end70;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2000.03.02.04.52.47;	author end70;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2000.03.02.04.48.55;	author end70;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2000.03.02.04.46.32;	author end70;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2000.03.02.04.44.14;	author end70;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2000.03.02.04.41.11;	author end70;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2000.03.02.03.47.25;	author end70;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2000.03.02.03.44.15;	author end70;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2000.03.02.03.35.04;	author end70;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2000.03.02.03.34.50;	author end70;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2000.03.02.03.34.44;	author end70;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2000.03.02.03.16.51;	author end70;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2000.03.02.03.11.27;	author end70;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2000.03.02.03.09.27;	author end70;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2000.03.02.03.08.32;	author end70;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2000.03.02.03.07.53;	author end70;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2000.03.02.00.28.58;	author end70;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2000.03.01.21.33.54;	author end70;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2000.03.01.21.27.43;	author end70;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.41
+log
+@*** empty log message ***
+@
+text
+@package CGI::Seamstress;
+
+use Carp;
+use CGI;
+require Exporter;
+
+
+use vars qw($VERSION @@ISA @@EXPORT @@EXPORT_OK);
+$VERSION   = '1.1';
+@@ISA       = qw(CGI);
+@@EXPORT    = qw(
+		Validate_Form Is_Optional Weave Message Validate_Email_Syntax 
+		Display To_String Dump_Parms Template_Directory Text_to_HTML
+		);
+
+use strict;
+
+
+
+# ---------------------------------------------------------------------------
+# new
+# ---------------------------------------------------------------------------
+
+
+sub new {
+    my ($pkg, $args_hashref) = @@_;
+
+    unless (!ref $pkg) {
+	die "Class only constructor.";
+    }
+    
+    my $obj = $pkg->SUPER::new();
+
+    map { $::_Thread{$_}=$obj->param($_) } $obj->param();
+
+    my ($k,$v,%def);
+    while (($k,$v) = each %{$args_hashref}) {
+	warn "$k->$v";
+	$obj->{Seamstress}{$k}=$v;
+	++$def{$k};
+    }
+
+    die 'Template_Directory must be defined' unless ($def{Template_Directory});
+
+    while (($k,$v) = each %{$obj->{Seamstress}}) {
+	warn "$k .->. $v";
+    }
+
+    return $obj; 
+}
+
+
+
+# ---------------------------------------------------------------------------
+# Internal variables
+# ---------------------------------------------------------------------------
+
+sub Template_Directory {
+    
+    my ($self,$dir)=@@_;
+
+    warn "Template_Directory: $self, $dir";
+
+    if ($dir) {
+	$self->{Template_Directory}=$dir;
+    } else {
+	$self->{Template_Directory};
+    }
+}
+
+
+# Parameters:
+#	1- $hashref : Ref of hash containing all the keys & values needed to be validated
+#	2- @@optional: all the optional keys that can be NULL or empty
+#
+# Description:
+#
+#----------------------------------------------------------------
+sub Validate_Form {
+
+
+    my $result;
+
+    my ($self,$hashref,@@optional) = @@_;
+    warn "Validate_Form($self,$hashref,@@optional)";
+    my ($key, $value);
+    my @@array = ();
+    my $flag = 0;
+
+    while ( ($key, $value) = each  %$hashref) {
+	warn "Working with $key->$value";
+	if ( (!$value) && (!Is_Optional($key, @@optional)) ) {
+	    warn "$key is undefined and is not optional...";
+	    $flag = 1;
+	    push(@@array, $key);
+	}
+    }
+    if ($flag) {
+	warn "returning this array from validate_form...";
+	warn join ':', @@array;
+	return (0,'Empty Field Error', @@array);
+    }         
+    warn "Validate_Form found no errors returning 1";
+    return (1,'');
+}
+
+# Return 1 if the key is optional otherwise 0
+
+sub Is_Optional {
+    warn "Is_Optional()";
+
+    my ($key, @@array) = @@_;
+
+    foreach (@@array) {
+	if ($_ eq $key) {
+	    return 1;
+	}
+    }
+    return 0;
+}
+
+# 
+# Description:
+#	This library contains all the general purpose function.
+#
+# Functions List:
+#
+#	1- Fillin_Template($filename, $hashref, $getresult)
+#	2- Message($msg,)
+#
+#
+#----------------------------------------------------------------
+#	Added		By			Updated	
+#----------------------------------------------------------------
+
+#
+#----------------------------------------------------------------
+
+#
+# Name: Weave
+
+# Date: 02/28/2000
+#
+# Parameters:
+#	1- $filename: Template File path/name.tmpl
+#	2- $hashref : Ref of hash containing all the key 
+#          	      values pairs which will be used as a variables 
+#	      	      in template file
+#	3- $getresult: (1 or 0) if 1 than result will be returned in array
+#			else result will be displayed	
+#
+# Description:
+#	This routine simply filles in the received template with 
+#	values specified in $hashref
+#----------------------------------------------------------------
+sub Weave {
+
+
+
+    my ($filename, $hashref, $getresult)   = @@_;
+    warn "Weave($filename,$hashref,$getresult)";
+    my ($key,$value);
+
+    my @@Result;
+    if (!open(FILE, "$filename")) {
+	my $err = "$! ($filename)";
+	return (-1, $err);
+    }
+
+    my $delim='__Seamstress__';
+    my $temp = join $delim, <FILE>;
+
+    warn "original file: $temp";
+
+    while (($key, $value) = each %$hashref) {
+	$key = "%$key%";
+	warn " *** checking $key in file";
+	$temp =~ s/$key/$value/g;
+    }
+
+    warn "substituted file: $temp";
+
+    foreach my $line (split $delim, $temp) {
+    # if not defined, delete it
+	$line =~ s/%\w+%//g;
+	if ($getresult) {
+	    push(@@Result, $line);
+	} else {
+	    print "$line";
+	}
+    }
+
+    if (($getresult) && (@@Result)) {
+	return (0,'', @@Result);
+    }
+}
+
+
+sub Message {
+
+    
+    my ($self,$msg, $bold, $blink, $fgcolor, $notable, $bgcolor, $borderwidth, $tablewidth) = @@_;
+    
+    warn "Message($self,$msg, $bold, $blink, $fgcolor, $notable, $bgcolor, $borderwidth, $tablewidth)";
+
+    if ($bold) { $msg = "<B> $msg </B>"; }
+    if ($blink) { $msg = "<BLINK> $msg </BLINK>"; }
+    if ($fgcolor) {
+	$msg = "<FONT FACE=ARIAL SIZE=2 COLOR=$fgcolor> $msg </FONT>";
+    } else {
+	$msg = "<FONT FACE=ARIAL SIZE=2 COLOR=000000> $msg </FONT>";
+    }
+    if (!$bgcolor) { $bgcolor='WHITE'; }
+    if ($notable == 0) {
+	$msg = "$msg";
+    } else {
+	$msg = "<TABLE WIDTH=$tablewidth BORDERCOLOR=000000 CELLSPACING=0 BORDER=$borderwidth BGCOLOR=$bgcolor><TR><TD> $msg </TD></TR></TABLE
+>";
+    }
+    return $msg;
+}
+
+sub Validate_Email_Syntax {
+
+    my ($self,$email)=@@_;
+
+    warn "Valid_Email_Syntax($self,$email)";
+
+    $email =~ s/^\s+|\s+$//g;
+    if ( ($email !~ /\@@/ ) || ($email !~ /\./) || ($email =~ /\s+/g) ) { 
+	return -1;
+    }
+    return 0;
+}
+
+######################################################
+# 		Sub Routines 			      #
+######################################################
+sub Display {
+
+    my ($status,$err);
+
+    my ($self,$file,$hashref) = @@_;
+    warn "Display($self,$file,$hashref) located in " . $self->{Seamstress}{Template_Directory};
+    ($status, $err) = Weave($self->{Seamstress}{Template_Directory} . "/$file", $hashref);
+    if ($status eq -1) {
+	print "Error ($status)\n$err\n\n";
+	exit;
+    }
+    exit;
+}
+
+
+sub To_String {
+    warn "To_String()";
+
+	# return CGI object in same format that is expected by CGI to create from a string
+	my $self = shift;
+	my $res = '';
+	foreach my $key ($self->param) {
+		# process each parameter
+		my @@vals = $self->param($key);
+		foreach my $val (@@vals) {
+			$res = $res . '&' if ($res ne '');
+			$res = $res . $key . '=' . $self->escape($val);
+		}
+	}
+	return $res;
+}
+
+sub Dump_Parms() {
+    warn "Dump_Parms()";
+
+    my ($self,$border_message)=@@_;
+
+    warn "=" x 50, "\n";
+    warn "\nSTART Parameter Dump ($border_message)\n";
+    warn "=" x 50, "\n";
+
+    foreach my $key ($self->param) {
+	warn "$key:\t" . $self->param($key) . "\n";
+    }
+    warn "=" x 50, "\n";
+    warn "\nEND Parameter Dump ($border_message)\n";
+    warn "=" x 50, "\n";
+
+}
+
+sub Text_to_HTML {
+    warn "Text_to_HTML()";
+
+	# return CGI object in same format that is expected by CGI to create from a string
+	my $self = shift;
+	my $string = shift;
+
+	$string =~ s/\n/<BR>/g;
+
+	return $string;
+}
+
+1;
+
+@
+
+
+1.40
+log
+@*** empty log message ***
+@
+text
+@d200 1
+a200 1
+    warn "Message()";
+d204 2
+@
+
+
+1.39
+log
+@*** empty log message ***
+@
+text
+@a81 1
+
+@
+
+
+1.38
+log
+@*** empty log message ***
+@
+text
+@d244 1
+a244 1
+    ($status, $err) = Weave($self->{_Template_Directory} . "/$file", $hashref);
+@
+
+
+1.37
+log
+@*** empty log message ***
+@
+text
+@d65 1
+a65 1
+	$self->{_Template_Directory}=$dir;
+d67 1
+a67 1
+	$self->{_Template_Directory};
+d243 1
+a243 1
+    warn "Display($self,$file,$hashref) located in " . $self->{_Template_Directory};
+@
+
+
+1.36
+log
+@*** empty log message ***
+@
+text
+@d34 2
+@
+
+
+1.35
+log
+@*** empty log message ***
+@
+text
+@d41 1
+a41 1
+    die 'Template_Directory must be defined' unless ($def{'Template_Directory'});
+@
+
+
+1.34
+log
+@*** empty log message ***
+@
+text
+@d32 3
+a34 1
+    my ($k,$v);
+d37 2
+d41 5
+a45 1
+    my $obj = $pkg->SUPER::new();
+d47 1
+a47 1
+    return $obj;
+@
+
+
+1.33
+log
+@*** empty log message ***
+@
+text
+@d26 1
+a26 1
+    my ($pkg,@@args) = @@_;
+d32 5
+@
+
+
+1.32
+log
+@*** empty log message ***
+@
+text
+@d32 1
+a32 1
+    $pkg->SUPER::new();
+@
+
+
+1.31
+log
+@*** empty log message ***
+@
+text
+@d24 1
+a24 1
+=head1
+d28 3
+a30 1
+    my $obj = $pkg->new();
+d32 2
+d36 1
+a36 1
+=cut
+@
+
+
+1.30
+log
+@*** empty log message ***
+@
+text
+@d24 1
+d32 1
+@
+
+
+1.29
+log
+@*** empty log message ***
+@
+text
+@d20 12
+@
+
+
+1.28
+log
+@*** empty log message ***
+@
+text
+@d60 1
+a60 1
+	if ( (!$value) && (!is_optional($key, @@optional)) ) {
+@
+
+
+1.27
+log
+@*** empty log message ***
+@
+text
+@d211 1
+a211 1
+    ($status, $err) = Weave($self->{_template_directory} . "/$file", $hashref);
+@
+
+
+1.26
+log
+@*** empty log message ***
+@
+text
+@d11 4
+a14 1
+@@EXPORT    = qw(Validate_Form_Info Is_Optional Fillin_Template Message Validate_Email_Syntax Display to_string dump_parms template_directory);
+d25 1
+a25 1
+sub template_directory {
+d29 1
+a29 1
+    warn "TD: $self, $dir";
+d32 1
+a32 1
+	$self->{_template_directory}=$dir;
+d34 1
+a34 1
+	$self->{_template_directory};
+a37 14
+#
+# Name    : Form.pl
+# 
+# Description:
+#	This library contains all the functions related to processing forms.
+#
+# Functions List:
+#
+#	1- ValidateFormInfo()
+#
+#
+
+#
+#----------------------------------------------------------------
+a38 4
+#
+# Name: Validate_Form_Info 
+# Date: 02/28/2000
+#
+d46 1
+a46 1
+sub Validate_Form_Info {
+d53 1
+a53 1
+    warn "Validate_Form_Info($self,$hashref,@@optional)";
+d60 1
+a60 1
+	if ( (!$value) && (!Is_Optional($key, @@optional)) ) {
+d67 1
+a67 1
+	warn "returning from Validate_Form_Info:";
+d71 1
+a71 1
+    warn "Validate_Form_Info found no errors returning 1";
+d96 1
+a96 1
+#	1- Filling_Template($filename, $hashref, $getresult)
+d108 1
+a108 1
+# Name: Filling_Template
+d124 1
+a124 1
+sub Fillin_Template {
+d129 1
+a129 1
+    warn "Fillin_Template($filename,$hashref,$getresult)";
+a160 1
+
+d210 2
+a211 2
+    warn "Display($self,$file,$hashref) located in " . $self->{_template_directory};
+    ($status, $err) = Fillin_Template($self->{_template_directory} . "/$file", $hashref);
+d220 2
+a221 2
+sub to_string {
+    warn "to_string()";
+d237 2
+a238 2
+sub dump_parms() {
+    warn "dump_parms()";
+d242 11
+a252 1
+    $self->dumpParms($border_message);
+d255 2
+a256 2
+sub text_to_html {
+    warn "text_to_html()";
+@
+
+
+1.25
+log
+@*** empty log message ***
+@
+text
+@d207 3
+a209 1
+    warn "Valid_Email_Syntax()";
+a210 1
+    my $email  = shift;
+d256 2
+a257 2
+    my $self=shift;
+    my $border_message=shift;
+@
+
+
+1.24
+log
+@*** empty log message ***
+@
+text
+@d186 1
+a186 1
+    my ($msg, $bold, $blink, $fgcolor, $notable, $bgcolor, $borderwidth, $tablewidth) = @@_;
+@
+
+
+1.23
+log
+@*** empty log message ***
+@
+text
+@d82 2
+d86 1
+@
+
+
+1.22
+log
+@*** empty log message ***
+@
+text
+@d157 1
+@
+
+
+1.21
+log
+@*** empty log message ***
+@
+text
+@d162 1
+a162 1
+    foreach my $line (split $delim, $temp);
+d171 1
+@
+
+
+1.20
+log
+@*** empty log message ***
+@
+text
+@d150 2
+a151 1
+    my $temp = join '', <FILE>;
+d162 2
+a163 3
+    @@big_array = split('`', $temp);
+    undef $temp;
+    foreach my $line (@@big_array) {
+@
+
+
+1.19
+log
+@*** empty log message ***
+@
+text
+@d149 4
+a152 4
+    my @@big_array = <FILE>;
+    close(FILE);
+    my $temp = join('`', @@big_array);
+    undef @@big_array;
+d158 2
+@
+
+
+1.18
+log
+@*** empty log message ***
+@
+text
+@d75 4
+a78 6
+	if (($value ne 0) && (!$value)) {
+	    $result = Is_Optional($key, @@optional);
+	    if ($result ne 0) {
+		$flag = 1;
+		push(@@array, $key);
+	    }
+d82 1
+a82 1
+	return (-1,'Empty Field Error', @@array);
+d84 1
+a84 1
+    return (0,'');
+d87 2
+d96 1
+a96 1
+	    return 0;
+d99 1
+a99 1
+    return -1;
+@
+
+
+1.17
+log
+@*** empty log message ***
+@
+text
+@d74 1
+@
+
+
+1.16
+log
+@*** empty log message ***
+@
+text
+@d63 1
+a63 1
+    warn "Validate_Form_Info()";
+d67 2
+a68 1
+    my ($hashref,@@optional) = @@_;
+@
+
+
+1.15
+log
+@*** empty log message ***
+@
+text
+@d216 1
+a216 1
+    warn "Display($self,$file) located in " . $self->{_template_directory};
+@
+
+
+1.14
+log
+@*** empty log message ***
+@
+text
+@d138 2
+a139 2
+    my ($self,$filename, $hashref, $getresult)   = @@_;
+    warn "Fillin_Template($self,$filename,$hashref,$getresult)";
+@
+
+
+1.13
+log
+@*** empty log message ***
+@
+text
+@a135 1
+    warn "Fillin_Template()";
+d137 3
+a139 1
+    my ($filename, $hashref, $getresult)   = @@_;
+@
+
+
+1.12
+log
+@*** empty log message ***
+@
+text
+@d23 7
+a29 2
+    if ($_[1]) {
+	$_[0]->{_template_directory}=$_[1];
+d31 1
+a31 1
+	$_[0]->{_template_directory};
+@
+
+
+1.11
+log
+@*** empty log message ***
+@
+text
+@d60 2
+d87 2
+a88 2
+    foreach $e (@@array) {
+	if ($e eq $key) {
+d134 1
+d153 1
+a153 1
+    foreach $line (@@big_array) {
+d162 1
+a162 1
+    if (($getsult) && (@@Result)) {
+d180 1
+a180 1
+    if (!$bgcolor) { $bgcolor=WHITE; }
+d207 1
+d209 1
+a209 2
+
+    my ($self,$file) = @@_;
+d211 1
+a211 1
+    ($status, $err) = Fillin_Template($self->{_template_directory} . "/$file", \%Form);
+@
+
+
+1.10
+log
+@*** empty log message ***
+@
+text
+@d13 1
+@
+
+
+1.9
+log
+@*** empty log message ***
+@
+text
+@d9 3
+a11 3
+#$VERSION   = '1.1';
+#@@ISA       = qw(CGI);
+#@@EXPORT    = qw(Validate_Form_Info Is_Optional Fillin_Template Message Validate_Email_Syntax Display to_string dump_parms template_directory);
+@
+
+
+1.8
+log
+@*** empty log message ***
+@
+text
+@a13 3
+# ---------------------------------------------------------------------------
+# sub new
+# ---------------------------------------------------------------------------
+a14 15
+sub new {
+    warn "new()";
+    warn "args: ", @@_;
+
+    my ($class)=@@_;
+
+    bless {
+	_template_directory => $_[1]
+	}, $class;
+
+    warn "class: $class";
+    warn "template_dir: $_[1]";
+
+}
+	
+@
+
+
+1.7
+log
+@*** empty log message ***
+@
+text
+@d9 3
+a11 3
+$VERSION   = '1.1';
+@@ISA       = qw(CGI);
+@@EXPORT    = qw(Validate_Form_Info Is_Optional Fillin_Template Message Validate_Email_Syntax Display to_string dump_parms template_directory);
+d22 1
+a22 1
+    my $class=$_[0];
+@
+
+
+1.6
+log
+@*** empty log message ***
+@
+text
+@d20 1
+a20 1
+    warn @@_;
+@
+
+
+1.5
+log
+@*** empty log message ***
+@
+text
+@d20 1
+@
+
+
+1.4
+log
+@*** empty log message ***
+@
+text
+@d19 2
+d26 4
+@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@d11 1
+a11 1
+@@EXPORT    = qw(Validate_Form_Info Is_Optional Fillin_Template Message Validate_Email_Syntax Display to_string dump_parms);
+d14 25
+d214 1
+a214 1
+    warn "Display()";
+d217 2
+a218 1
+    ($status, $err) = Fillin_Template("$tmpl/$file", \%Form);
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d10 2
+a11 2
+@@ISA       = qw(Exporter);
+@@EXPORT    = qw(Validate_Form_Info Is_Optional Fillin_Template Message Validate_Email_Syntax);
+d43 2
+d66 2
+d114 2
+d151 1
+d174 2
+d182 54
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 2
+d6 1
+a6 1
+use Carp;
+d9 1
+a9 1
+$VERSION   = '2.9';
+a16 2
+# Author  : Farhan Ansari
+# Email   : fansari@@end70.com
+d26 1
+a26 4
+#----------------------------------------------------------------
+#	Added		By			Updated	
+#----------------------------------------------------------------
+#	02/28/2000	Farhan Ansari		00/00/0000
+a31 1
+# By  : Farhan Ansari
+d41 1
+a41 1
+ sub Validate_Form_Info {
+d43 30
+a72 30
+        my ($hashref,@@optional) = @@_;
+        my ($key, $value);
+        my @@array = ();
+        my $flag = 0;
+
+        while ( ($key, $value) = each  %$hashref) {
+            if (($value ne 0) && (!$value)) {
+                $result = Is_Optional($key, @@optional);
+                if ($result ne 0) {
+                  $flag = 1;
+                  push(@@array, $key);
+                }
+            }
+        }
+        if ($flag) {
+            return (-1,'Empty Field Error', @@array);
+        }         
+        return (0,'');
+ }
+
+ sub Is_Optional {
+        my ($key, @@array) = @@_;
+
+        foreach $e (@@array) {
+                if ($e eq $key) {
+                   return 0;
+                }
+        }
+        return -1;
+ }
+d87 1
+a87 1
+#	02/28/2000	Farhan Ansari		00/00/0000
+d93 1
+a93 1
+# By  : Farhan Ansari
+d110 1
+a110 1
+	my ($filename, $hashref, $getresult)   = @@_;
+d112 48
+a159 48
+        my @@Result;
+        if (!open(FILE, "$filename")) {
+                my $err = "$! ($filename)";
+                return (-1, $err);
+        }
+        my @@big_array = <FILE>;
+        close(FILE);
+        my $temp = join('`', @@big_array);
+	undef @@big_array;
+
+        while (($key, $value) = each %$hashref) {
+                $key = "%$key%";
+                $temp =~ s/$key/$value/g;
+        }
+
+        @@big_array = split('`', $temp);
+	undef $temp;
+        foreach $line (@@big_array) {
+                $line =~ s/%\w+%//g;
+                if ($getresult) {
+                        push(@@Result, $line);
+                } else {
+                        print "$line";
+                }
+        }
+
+        if (($getsult) && (@@Result)) {
+                return (0,'', @@Result);
+        }
+ }
+
+
+ sub Message {
+ 
+        my ($msg, $bold, $blink, $fgcolor, $notable, $bgcolor, $borderwidth, $tablewidth) = @@_;
+ 
+        if ($bold) { $msg = "<B> $msg </B>"; }
+        if ($blink) { $msg = "<BLINK> $msg </BLINK>"; }
+        if ($fgcolor) {
+                $msg = "<FONT FACE=ARIAL SIZE=2 COLOR=$fgcolor> $msg </FONT>";
+        } else {
+                $msg = "<FONT FACE=ARIAL SIZE=2 COLOR=000000> $msg </FONT>";
+        }
+        if (!$bgcolor) { $bgcolor=WHITE; }
+        if ($notable == 0) {
+                $msg = "$msg";
+        } else {
+                $msg = "<TABLE WIDTH=$tablewidth BORDERCOLOR=000000 CELLSPACING=0 BORDER=$borderwidth BGCOLOR=$bgcolor><TR><TD> $msg </TD></TR></TABLE
+d161 13
+a173 13
+        }
+        return $msg;
+ }
+
+ sub Validate_Email_Syntax {
+
+        my $email  = shift;
+        $email =~ s/^\s+|\s+$//g;
+        if ( ($email !~ /\@@/ ) || ($email !~ /\./) || ($email =~ /\s+/g) ) { 
+                return -1;
+        }
+        return 0;
+ }
+@

@@ -1,0 +1,286 @@
+package CGI::Seamstress;
+
+use Carp;
+use CGI;
+require Exporter;
+
+
+use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
+$VERSION   = '1.1';
+@ISA       = qw(CGI);
+@EXPORT    = qw(
+		Validate_Form Is_Optional Weave Message Validate_Email_Syntax 
+		Display To_String Dump_Parms Template_Directory Text_to_HTML
+		);
+
+use strict;
+
+
+
+# ---------------------------------------------------------------------------
+# new
+# ---------------------------------------------------------------------------
+
+
+sub new {
+    my ($pkg,@args) = @_;
+
+    unless (!ref $pkg) {
+	die "Class only constructor.";
+    }
+    
+    $pkg->SUPER::new();
+
+    return $obj;
+}
+
+
+
+# ---------------------------------------------------------------------------
+# Internal variables
+# ---------------------------------------------------------------------------
+
+sub Template_Directory {
+    
+    my ($self,$dir)=@_;
+
+    warn "Template_Directory: $self, $dir";
+
+    if ($dir) {
+	$self->{_Template_Directory}=$dir;
+    } else {
+	$self->{_Template_Directory};
+    }
+}
+
+
+# Parameters:
+#	1- $hashref : Ref of hash containing all the keys & values needed to be validated
+#	2- @optional: all the optional keys that can be NULL or empty
+#
+# Description:
+#
+#----------------------------------------------------------------
+sub Validate_Form {
+
+
+
+    my $result;
+
+    my ($self,$hashref,@optional) = @_;
+    warn "Validate_Form($self,$hashref,@optional)";
+    my ($key, $value);
+    my @array = ();
+    my $flag = 0;
+
+    while ( ($key, $value) = each  %$hashref) {
+	warn "Working with $key->$value";
+	if ( (!$value) && (!Is_Optional($key, @optional)) ) {
+	    warn "$key is undefined and is not optional...";
+	    $flag = 1;
+	    push(@array, $key);
+	}
+    }
+    if ($flag) {
+	warn "returning this array from validate_form...";
+	warn join ':', @array;
+	return (0,'Empty Field Error', @array);
+    }         
+    warn "Validate_Form found no errors returning 1";
+    return (1,'');
+}
+
+# Return 1 if the key is optional otherwise 0
+
+sub Is_Optional {
+    warn "Is_Optional()";
+
+    my ($key, @array) = @_;
+
+    foreach (@array) {
+	if ($_ eq $key) {
+	    return 1;
+	}
+    }
+    return 0;
+}
+
+# 
+# Description:
+#	This library contains all the general purpose function.
+#
+# Functions List:
+#
+#	1- Fillin_Template($filename, $hashref, $getresult)
+#	2- Message($msg,)
+#
+#
+#----------------------------------------------------------------
+#	Added		By			Updated	
+#----------------------------------------------------------------
+
+#
+#----------------------------------------------------------------
+
+#
+# Name: Weave
+
+# Date: 02/28/2000
+#
+# Parameters:
+#	1- $filename: Template File path/name.tmpl
+#	2- $hashref : Ref of hash containing all the key 
+#          	      values pairs which will be used as a variables 
+#	      	      in template file
+#	3- $getresult: (1 or 0) if 1 than result will be returned in array
+#			else result will be displayed	
+#
+# Description:
+#	This routine simply filles in the received template with 
+#	values specified in $hashref
+#----------------------------------------------------------------
+sub Weave {
+
+
+
+    my ($filename, $hashref, $getresult)   = @_;
+    warn "Weave($filename,$hashref,$getresult)";
+    my ($key,$value);
+
+    my @Result;
+    if (!open(FILE, "$filename")) {
+	my $err = "$! ($filename)";
+	return (-1, $err);
+    }
+
+    my $delim='__Seamstress__';
+    my $temp = join $delim, <FILE>;
+
+    warn "original file: $temp";
+
+    while (($key, $value) = each %$hashref) {
+	$key = "%$key%";
+	warn " *** checking $key in file";
+	$temp =~ s/$key/$value/g;
+    }
+
+    warn "substituted file: $temp";
+
+    foreach my $line (split $delim, $temp) {
+    # if not defined, delete it
+	$line =~ s/%\w+%//g;
+	if ($getresult) {
+	    push(@Result, $line);
+	} else {
+	    print "$line";
+	}
+    }
+
+    if (($getresult) && (@Result)) {
+	return (0,'', @Result);
+    }
+}
+
+
+sub Message {
+    warn "Message()";
+    
+    my ($self,$msg, $bold, $blink, $fgcolor, $notable, $bgcolor, $borderwidth, $tablewidth) = @_;
+    
+    if ($bold) { $msg = "<B> $msg </B>"; }
+    if ($blink) { $msg = "<BLINK> $msg </BLINK>"; }
+    if ($fgcolor) {
+	$msg = "<FONT FACE=ARIAL SIZE=2 COLOR=$fgcolor> $msg </FONT>";
+    } else {
+	$msg = "<FONT FACE=ARIAL SIZE=2 COLOR=000000> $msg </FONT>";
+    }
+    if (!$bgcolor) { $bgcolor='WHITE'; }
+    if ($notable == 0) {
+	$msg = "$msg";
+    } else {
+	$msg = "<TABLE WIDTH=$tablewidth BORDERCOLOR=000000 CELLSPACING=0 BORDER=$borderwidth BGCOLOR=$bgcolor><TR><TD> $msg </TD></TR></TABLE
+>";
+    }
+    return $msg;
+}
+
+sub Validate_Email_Syntax {
+
+    my ($self,$email)=@_;
+
+    warn "Valid_Email_Syntax($self,$email)";
+
+    $email =~ s/^\s+|\s+$//g;
+    if ( ($email !~ /\@/ ) || ($email !~ /\./) || ($email =~ /\s+/g) ) { 
+	return -1;
+    }
+    return 0;
+}
+
+######################################################
+# 		Sub Routines 			      #
+######################################################
+sub Display {
+
+    my ($status,$err);
+
+    my ($self,$file,$hashref) = @_;
+    warn "Display($self,$file,$hashref) located in " . $self->{_Template_Directory};
+    ($status, $err) = Weave($self->{_Template_Directory} . "/$file", $hashref);
+    if ($status eq -1) {
+	print "Error ($status)\n$err\n\n";
+	exit;
+    }
+    exit;
+}
+
+
+sub To_String {
+    warn "To_String()";
+
+	# return CGI object in same format that is expected by CGI to create from a string
+	my $self = shift;
+	my $res = '';
+	foreach my $key ($self->param) {
+		# process each parameter
+		my @vals = $self->param($key);
+		foreach my $val (@vals) {
+			$res = $res . '&' if ($res ne '');
+			$res = $res . $key . '=' . $self->escape($val);
+		}
+	}
+	return $res;
+}
+
+sub Dump_Parms() {
+    warn "Dump_Parms()";
+
+    my ($self,$border_message)=@_;
+
+    warn "=" x 50, "\n";
+    warn "\nSTART Parameter Dump ($border_message)\n";
+    warn "=" x 50, "\n";
+
+    foreach my $key ($self->param) {
+	warn "$key:\t" . $self->param($key) . "\n";
+    }
+    warn "=" x 50, "\n";
+    warn "\nEND Parameter Dump ($border_message)\n";
+    warn "=" x 50, "\n";
+
+}
+
+sub Text_to_HTML {
+    warn "Text_to_HTML()";
+
+	# return CGI object in same format that is expected by CGI to create from a string
+	my $self = shift;
+	my $string = shift;
+
+	$string =~ s/\n/<BR>/g;
+
+	return $string;
+}
+
+1;
+

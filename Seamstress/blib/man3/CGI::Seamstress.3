@@ -1,0 +1,368 @@
+.rn '' }`
+''' $RCSfile$$Revision$$Date$
+'''
+''' $Log$
+'''
+.de Sh
+.br
+.if t .Sp
+.ne 5
+.PP
+\fB\\$1\fR
+.PP
+..
+.de Sp
+.if t .sp .5v
+.if n .sp
+..
+.de Ip
+.br
+.ie \\n(.$>=3 .ne \\$3
+.el .ne 3
+.IP "\\$1" \\$2
+..
+.de Vb
+.ft CW
+.nf
+.ne \\$1
+..
+.de Ve
+.ft R
+
+.fi
+..
+'''
+'''
+'''     Set up \*(-- to give an unbreakable dash;
+'''     string Tr holds user defined translation string.
+'''     Bell System Logo is used as a dummy character.
+'''
+.tr \(*W-|\(bv\*(Tr
+.ie n \{\
+.ds -- \(*W-
+.ds PI pi
+.if (\n(.H=4u)&(1m=24u) .ds -- \(*W\h'-12u'\(*W\h'-12u'-\" diablo 10 pitch
+.if (\n(.H=4u)&(1m=20u) .ds -- \(*W\h'-12u'\(*W\h'-8u'-\" diablo 12 pitch
+.ds L" ""
+.ds R" ""
+'''   \*(M", \*(S", \*(N" and \*(T" are the equivalent of
+'''   \*(L" and \*(R", except that they are used on ".xx" lines,
+'''   such as .IP and .SH, which do another additional levels of
+'''   double-quote interpretation
+.ds M" """
+.ds S" """
+.ds N" """""
+.ds T" """""
+.ds L' '
+.ds R' '
+.ds M' '
+.ds S' '
+.ds N' '
+.ds T' '
+'br\}
+.el\{\
+.ds -- \(em\|
+.tr \*(Tr
+.ds L" ``
+.ds R" ''
+.ds M" ``
+.ds S" ''
+.ds N" ``
+.ds T" ''
+.ds L' `
+.ds R' '
+.ds M' `
+.ds S' '
+.ds N' `
+.ds T' '
+.ds PI \(*p
+'br\}
+.\"	If the F register is turned on, we'll generate
+.\"	index entries out stderr for the following things:
+.\"		TH	Title 
+.\"		SH	Header
+.\"		Sh	Subsection 
+.\"		Ip	Item
+.\"		X<>	Xref  (embedded
+.\"	Of course, you have to process the output yourself
+.\"	in some meaninful fashion.
+.if \nF \{
+.de IX
+.tm Index:\\$1\t\\n%\t"\\$2"
+..
+.nr % 0
+.rr F
+.\}
+.TH SEAMSTRESS 1 "perl 5.005, patch 03" "2/Mar/2000" "User Contributed Perl Documentation"
+.UC
+.if n .hy 0
+.if n .na
+.ds C+ C\v'-.1v'\h'-1p'\s-2+\h'-1p'+\s0\v'.1v'\h'-1p'
+.de CQ          \" put $1 in typewriter font
+.ft CW
+'if n "\c
+'if t \\&\\$1\c
+'if n \\&\\$1\c
+'if n \&"
+\\&\\$2 \\$3 \\$4 \\$5 \\$6 \\$7
+'.ft R
+..
+.\" @(#)ms.acc 1.5 88/02/08 SMI; from UCB 4.2
+.	\" AM - accent mark definitions
+.bd B 3
+.	\" fudge factors for nroff and troff
+.if n \{\
+.	ds #H 0
+.	ds #V .8m
+.	ds #F .3m
+.	ds #[ \f1
+.	ds #] \fP
+.\}
+.if t \{\
+.	ds #H ((1u-(\\\\n(.fu%2u))*.13m)
+.	ds #V .6m
+.	ds #F 0
+.	ds #[ \&
+.	ds #] \&
+.\}
+.	\" simple accents for nroff and troff
+.if n \{\
+.	ds ' \&
+.	ds ` \&
+.	ds ^ \&
+.	ds , \&
+.	ds ~ ~
+.	ds ? ?
+.	ds ! !
+.	ds /
+.	ds q
+.\}
+.if t \{\
+.	ds ' \\k:\h'-(\\n(.wu*8/10-\*(#H)'\'\h"|\\n:u"
+.	ds ` \\k:\h'-(\\n(.wu*8/10-\*(#H)'\`\h'|\\n:u'
+.	ds ^ \\k:\h'-(\\n(.wu*10/11-\*(#H)'^\h'|\\n:u'
+.	ds , \\k:\h'-(\\n(.wu*8/10)',\h'|\\n:u'
+.	ds ~ \\k:\h'-(\\n(.wu-\*(#H-.1m)'~\h'|\\n:u'
+.	ds ? \s-2c\h'-\w'c'u*7/10'\u\h'\*(#H'\zi\d\s+2\h'\w'c'u*8/10'
+.	ds ! \s-2\(or\s+2\h'-\w'\(or'u'\v'-.8m'.\v'.8m'
+.	ds / \\k:\h'-(\\n(.wu*8/10-\*(#H)'\z\(sl\h'|\\n:u'
+.	ds q o\h'-\w'o'u*8/10'\s-4\v'.4m'\z\(*i\v'-.4m'\s+4\h'\w'o'u*8/10'
+.\}
+.	\" troff and (daisy-wheel) nroff accents
+.ds : \\k:\h'-(\\n(.wu*8/10-\*(#H+.1m+\*(#F)'\v'-\*(#V'\z.\h'.2m+\*(#F'.\h'|\\n:u'\v'\*(#V'
+.ds 8 \h'\*(#H'\(*b\h'-\*(#H'
+.ds v \\k:\h'-(\\n(.wu*9/10-\*(#H)'\v'-\*(#V'\*(#[\s-4v\s0\v'\*(#V'\h'|\\n:u'\*(#]
+.ds _ \\k:\h'-(\\n(.wu*9/10-\*(#H+(\*(#F*2/3))'\v'-.4m'\z\(hy\v'.4m'\h'|\\n:u'
+.ds . \\k:\h'-(\\n(.wu*8/10)'\v'\*(#V*4/10'\z.\v'-\*(#V*4/10'\h'|\\n:u'
+.ds 3 \*(#[\v'.2m'\s-2\&3\s0\v'-.2m'\*(#]
+.ds o \\k:\h'-(\\n(.wu+\w'\(de'u-\*(#H)/2u'\v'-.3n'\*(#[\z\(de\v'.3n'\h'|\\n:u'\*(#]
+.ds d- \h'\*(#H'\(pd\h'-\w'~'u'\v'-.25m'\f2\(hy\fP\v'.25m'\h'-\*(#H'
+.ds D- D\\k:\h'-\w'D'u'\v'-.11m'\z\(hy\v'.11m'\h'|\\n:u'
+.ds th \*(#[\v'.3m'\s+1I\s-1\v'-.3m'\h'-(\w'I'u*2/3)'\s-1o\s+1\*(#]
+.ds Th \*(#[\s+2I\s-2\h'-\w'I'u*3/5'\v'-.3m'o\v'.3m'\*(#]
+.ds ae a\h'-(\w'a'u*4/10)'e
+.ds Ae A\h'-(\w'A'u*4/10)'E
+.ds oe o\h'-(\w'o'u*4/10)'e
+.ds Oe O\h'-(\w'O'u*4/10)'E
+.	\" corrections for vroff
+.if v .ds ~ \\k:\h'-(\\n(.wu*9/10-\*(#H)'\s-2\u~\d\s+2\h'|\\n:u'
+.if v .ds ^ \\k:\h'-(\\n(.wu*10/11-\*(#H)'\v'-.4m'^\v'.4m'\h'|\\n:u'
+.	\" for low resolution devices (crt and lpr)
+.if \n(.H>23 .if \n(.V>19 \
+\{\
+.	ds : e
+.	ds 8 ss
+.	ds v \h'-1'\o'\(aa\(ga'
+.	ds _ \h'-1'^
+.	ds . \h'-1'.
+.	ds 3 3
+.	ds o a
+.	ds d- d\h'-1'\(ga
+.	ds D- D\h'-1'\(hy
+.	ds th \o'bp'
+.	ds Th \o'LP'
+.	ds ae ae
+.	ds Ae AE
+.	ds oe oe
+.	ds Oe OE
+.\}
+.rm #[ #] #H #V #F C
+.SH "NAME"
+CGI::Seamstress \- CGI extension supporting all programmatic aspects of 
+web application development.
+.SH "SYNOPSIS"
+use CGI::Seamstress;
+.PP
+$cgi = CGI::Seamstress->\fInew()\fR;
+.PP
+\&... create templates and have CGI::Seamstress fill in values and check
+for errors and notify the user of errors when they occur.
+.SH "DESCRIPTION"
+\fBCGI::Seamstress\fR is a Perl module which is substantially different
+in concept than HTML::Mason or HTML::Embperl, but largely equal in
+terms of functionality. CGI::Seamstress supplies all of the
+following:
+.Ip "\(bu as it subclasses \s-1CGI\s0.pm, all of its public \s-1API\s0 is available (in other words, there is no need to create a \s-1CGI\s0 object);" 4
+.Ip "\(bu cookie-based sessioning" 4
+.Ip "\(bu template-based form generation and error-checking" 4
+.Ip "\(bu DBIx::Recordset-based database access" 4
+.PP
+\fB\s-1CGI::\s0Seamstress\fR works by having a \s-1CGI\s0 program (heretofore referred
+to as the Seamstress) generate an \s-1HTML\s0 file from a template file,
+which in the current implementation is nothing more than an \s-1HTML\s0 file
+with syntactic markup at places where Perl strings are supposed to be
+placed into the \s-1HTML\s0 file. 
+.PP
+Upon submission of the \s-1HTML\s0 file (by the user hitting a submit
+button), the action of the \s-1HTML\s0 file loops back to the Seamstress
+which then does error checking on the file. If any of the error checks
+fail, the form is redisplayed with a descriptive error message.
+.Sh "\s-1INNER\s0 \s-1WORKINGS\s0"
+The bottom line of \s-1CGI::\s0Seamstress is simple, yet elegant. Take a look
+at the following template file:
+.PP
+.Vb 1
+\&        <FORM ACTION="../bin/login.pl">
+.Ve
+.Vb 1
+\&        <INPUT TYPE=TEXT NAME=email VALUE=%email%> %email_Error%
+.Ve
+.Vb 1
+\&        </FORM>
+.Ve
+What the Seamstress (login.pl) does is take a hash (%Form) and fills in the
+values of the meta-html variables (email and email_Error in this
+case). When the form is first called, neither variable is defined so
+you get a blank text input field with no error message.
+.PP
+Should there be something wrong with this field (ie, it's blank and
+non-optional or the email address syntax is invalid), then when the
+form is resubmitted to the Seamstress, she simply fills in the error
+field and redisplays the form and the error message will pop up.
+.PP
+The process is the same for a form with multiple fields. The only
+thing necessary is each \s-1NAME\s0\-\s-1VALUE\s0 tag be unique
+.SH "API"
+.Sh "\f(CWnew()\fR"
+The new method must be passed an anonymous hash. In this hash the key
+\f(CWTemplate_Directory\fR must be bound to the directory in which template
+files exist.
+.PP
+calling \f(CWnew\fR does the following:
+.Ip "\(bu insures the method was called class-only not from an object" 4
+.Ip "\(bu binds \f(CW%::_Thread\fR to the query data (this works for scalar values, I haven't tested it for non-scalars)." 4
+.Ip "\(bu insures that the anonymous hash passed in bound \f(CWTemplate_Directory\fR" 4
+.Sh "\f(CWValidate_Form\fR"
+This method is passed a reference to a hash to be filled in and an
+array with the names of optional fields.
+.PP
+This method is a bit wasteful right now because the query data is
+already in \f(CW%::_Thread\fR.
+.Sh "\f(CWMessage\fR"
+This creates \s-1HTML\s0 error text. The fields will be discussed later. 
+It would be more descriptive to pass in a hashref as opposed to a
+non-descript series of scalars.
+.Sh "\f(CWValidate_Email_Syntax\fR"
+This method picks cherries from grapefruit trees in Guam.
+.Sh "\f(CWDisplay\fR"
+This re-displays the \s-1HTML\s0 template with the hash from \f(CWValidate_Form\fR
+bound to values of the template. Currently one must output the
+text/html header manually, but this will change.
+.Sh "\f(CWTo_String\fR"
+This is here because a prior programmer here didn't know about \s-1CGI\s0.pm's
+\f(CWsave_parameters\fR function.
+.PP
+\f(CWTo_String()\fR takes all the key-value pairs of a \s-1CGI\s0 object and
+converts it to a \s-1CGI\s0 query string. Very useful for storing inside a
+cookie.
+.Sh "\f(CWDump_Parms()\fR"
+\f(CWDump_Parms()\fR displays all the key-value pairs of a \s-1CGI\s0 object. It
+optionally takes a string which is the title of the debugging output
+stream.
+.PP
+Ie, \f(CW$S-\fR\fIDump_Parms\fR\|("bank info cgi object");>
+.Sh "\f(CWText_to_HTML\fR"
+This takes strings and replaces carriage returns with <\s-1BR\s0>.
+.SH "RUNNING THE EXAMPLE"
+On our systems, the example is at:
+.PP
+http://www.end70.com/terrence/CGI/Seamstress/html
+.PP
+Simply point your browser at html/index.html and mess with the
+form. Be sure to leave some fields blank as well mismatch the
+passwords and type an invalid email address. After awhile, enter all
+the fields correctly and you will
+.SH "TO DO"
+.Ip "\(bu sessioning (\s-1HTML::EP\s0 supports sessioning through cookies, \s-1DBI\s0, and MySQL) ... how many can I do?!" 4
+.Ip "\(bu error reporting currently dies which leads to internal server error pages... better to generate an error report page." 4
+.Ip "\(bu $S\->To_Database('Table_Name\*(T', \e%Form);" 4
+This will insert or update the specified table with the form data via
+\f(CWDBIx::Recordset\fR.
+.SH "AUTHOR"
+The original author of the templating and error-checkiing code is
+named Farhan and he does contract work in the Southern California
+area. The \fITo_String()\fR was authored by John who is somewhere in
+net-land. The \fIDump_Parms()\fR, object-orientation and the rest was
+authored by me, Terrence Brannon (TBONE@CPAN.ORG). I am the maintainer
+and extender of this code, so feel free to contact me when you have
+problems and suggestions. 
+.PP
+Salut.
+
+.rn }` ''
+.IX Title "SEAMSTRESS 1"
+.IX Name "CGI::Seamstress - CGI extension supporting all programmatic aspects of 
+web application development."
+
+.IX Header "NAME"
+
+.IX Header "SYNOPSIS"
+
+.IX Header "DESCRIPTION"
+
+.IX Item "\(bu as it subclasses \s-1CGI\s0.pm, all of its public \s-1API\s0 is available (in other words, there is no need to create a \s-1CGI\s0 object);"
+
+.IX Item "\(bu cookie-based sessioning"
+
+.IX Item "\(bu template-based form generation and error-checking"
+
+.IX Item "\(bu DBIx::Recordset-based database access"
+
+.IX Subsection "\s-1INNER\s0 \s-1WORKINGS\s0"
+
+.IX Header "API"
+
+.IX Subsection "\f(CWnew()\fR"
+
+.IX Item "\(bu insures the method was called class-only not from an object"
+
+.IX Item "\(bu binds \f(CW%::_Thread\fR to the query data (this works for scalar values, I haven't tested it for non-scalars)."
+
+.IX Item "\(bu insures that the anonymous hash passed in bound \f(CWTemplate_Directory\fR"
+
+.IX Subsection "\f(CWValidate_Form\fR"
+
+.IX Subsection "\f(CWMessage\fR"
+
+.IX Subsection "\f(CWValidate_Email_Syntax\fR"
+
+.IX Subsection "\f(CWDisplay\fR"
+
+.IX Subsection "\f(CWTo_String\fR"
+
+.IX Subsection "\f(CWDump_Parms()\fR"
+
+.IX Subsection "\f(CWText_to_HTML\fR"
+
+.IX Header "RUNNING THE EXAMPLE"
+
+.IX Header "TO DO"
+
+.IX Item "\(bu sessioning (\s-1HTML::EP\s0 supports sessioning through cookies, \s-1DBI\s0, and MySQL) ... how many can I do?!"
+
+.IX Item "\(bu error reporting currently dies which leads to internal server error pages... better to generate an error report page."
+
+.IX Item "\(bu $S\->To_Database('Table_Name\*(T', \e%Form);"
+
+.IX Header "AUTHOR"
+

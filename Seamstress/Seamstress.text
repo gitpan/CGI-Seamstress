@@ -1,0 +1,131 @@
+NAME
+    CGI::Seamstress - CGI extension supporting all programmatic aspects of
+    web application development.
+
+SYNOPSIS
+    use CGI::Seamstress;
+
+    $cgi = CGI::Seamstress->new();
+
+    ... create templates and have CGI::Seamstress fill in values and check
+    for errors and notify the user of errors when they occur.
+
+DESCRIPTION
+    CGI::Seamstress is a Perl module which is substantially different in
+    concept than HTML::Mason or HTML::Embperl, but largely equal in terms of
+    functionality. CGI::Seamstress supplies all of the following:
+
+    as it subclasses CGI.pm, all of its public API is available (in other
+    words, there is no need to create a CGI object);
+    cookie-based sessioning
+    template-based form generation and error-checking
+    DBIx::Recordset-based database access
+    CGI::Seamstress works by having a CGI program (heretofore referred to as
+    the Seamstress) generate an HTML file from a template file, which in the
+    current implementation is nothing more than an HTML file with syntactic
+    markup at places where Perl strings are supposed to be placed into the
+    HTML file.
+
+    Upon submission of the HTML file (by the user hitting a submit button),
+    the action of the HTML file loops back to the Seamstress which then does
+    error checking on the file. If any of the error checks fail, the form is
+    redisplayed with a descriptive error message.
+
+  INNER WORKINGS
+
+    The bottom line of CGI::Seamstress is simple, yet elegant. Take a look
+    at the following template file:
+
+            <FORM ACTION="../bin/login.pl">
+
+            <INPUT TYPE=TEXT NAME=email VALUE=%email%> %email_Error%
+
+            </FORM>
+
+    What the Seamstress (login.pl) does is take a hash (%Form) and fills in
+    the values of the meta-html variables (email and email_Error in this
+    case). When the form is first called, neither variable is defined so you
+    get a blank text input field with no error message.
+
+    Should there be something wrong with this field (ie, it's blank and non-
+    optional or the email address syntax is invalid), then when the form is
+    resubmitted to the Seamstress, she simply fills in the error field and
+    redisplays the form and the error message will pop up.
+
+    The process is the same for a form with multiple fields. The only thing
+    necessary is each NAME-VALUE tag be unique
+
+API
+  `new()'
+
+    The new method must be passed an anonymous hash. In this hash the key
+    `Template_Directory' must be bound to the directory in which template
+    files exist.
+
+    calling `new' does the following:
+
+    insures the method was called class-only not from an object
+    binds `%::_Thread' to the query data (this works for scalar
+    values, I haven't tested it for non-scalars).
+    insures that the anonymous hash passed in bound
+    `Template_Directory'
+  `Validate_Form'
+
+    This method is passed a reference to a hash to be filled in and an array
+    with the names of optional fields.
+
+    This method is a bit wasteful right now because the query data is
+    already in `%::_Thread'.
+
+  `Message'
+
+    This creates HTML error text. The fields will be discussed later. It
+    would be more descriptive to pass in a hashref as opposed to a non-
+    descript series of scalars.
+
+  `Validate_Email_Syntax'
+
+    This method picks cherries from grapefruit trees in Guam.
+
+  `Display'
+
+    This re-displays the HTML template with the hash from `Validate_Form'
+    bound to values of the template. Currently one must output the text/html
+    header manually, but this will change.
+
+  `To_String'
+
+    This is here because a prior programmer here didn't know about CGI.pm's
+    `save_parameters' function.
+
+    `To_String()' takes all the key-value pairs of a CGI object and converts
+    it to a CGI query string. Very useful for storing inside a cookie.
+
+  `Dump_Parms()'
+
+    `Dump_Parms()' displays all the key-value pairs of a CGI object. It
+    optionally takes a string which is the title of the debugging output
+    stream.
+
+    Ie, `$S-'Dump_Parms("bank info cgi object");>
+
+  `Text_to_HTML'
+
+    This takes strings and replaces carriage returns with <BR>.
+
+RUNNING THE EXAMPLE
+    Simply point your browser at html/index.html and mess with the form. Be
+    sure to leave some fields blank as well mismatch the passwords and type
+    an invalid email address. After awhile, enter all the fields correctly
+    and you will
+
+AUTHOR
+    The original author of the templating and error-checkiing code is named
+    Farhan and he does contract work in the Southern California area. The
+    to_string() was authored by John Barrett who is somewhere in net-land.
+    The dump_parms() was authored by me, Terrence Brannon (TBONE@CPAN.ORG).
+    I am the maintainer and extender of this code, so feel free to contact
+    me when you have problems and suggestions.
+
+    Salut.
+

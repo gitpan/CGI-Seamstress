@@ -1,0 +1,249 @@
+<HTML>
+<HEAD>
+<TITLE>CGI::Seamstress - CGI extension supporting all programmatic aspects of 
+web application development.</TITLE>
+<LINK REV="made" HREF="mailto:root@porky.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<UL>
+
+		<LI><A HREF="#INNER_WORKINGS">INNER WORKINGS</A>
+	</UL>
+
+	<LI><A HREF="#API">API</A>
+	<UL>
+
+		<LI><A HREF="#C_new_">&lt;CODE&gt;new()&lt;/CODE&gt;</A>
+		<LI><A HREF="#C_Validate_Form_">&lt;CODE&gt;Validate_Form&lt;/CODE&gt;</A>
+		<LI><A HREF="#C_Message_">&lt;CODE&gt;Message&lt;/CODE&gt;</A>
+		<LI><A HREF="#C_Validate_Email_Syntax_">&lt;CODE&gt;Validate_Email_Syntax&lt;/CODE&gt;</A>
+		<LI><A HREF="#C_Display_">&lt;CODE&gt;Display&lt;/CODE&gt;</A>
+		<LI><A HREF="#C_To_String_">&lt;CODE&gt;To_String&lt;/CODE&gt;</A>
+		<LI><A HREF="#C_Dump_Parms_">&lt;CODE&gt;Dump_Parms()&lt;/CODE&gt;</A>
+		<LI><A HREF="#C_Text_to_HTML_">&lt;CODE&gt;Text_to_HTML&lt;/CODE&gt;</A>
+	</UL>
+
+	<LI><A HREF="#RUNNING_THE_EXAMPLE">RUNNING THE EXAMPLE</A>
+	<LI><A HREF="#TO_DO">TO DO</A>
+	<LI><A HREF="#AUTHOR">AUTHOR</A>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="NAME">NAME</A></H1>
+<P>
+CGI::Seamstress - CGI extension supporting all programmatic aspects of web
+application development.
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS</A></H1>
+<P>
+use CGI::Seamstress;
+
+<P>
+<CODE>$cgi</CODE> = CGI::Seamstress-&gt;new();
+
+<P>
+... create templates and have CGI::Seamstress fill in values and check for
+errors and notify the user of errors when they occur.
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION</A></H1>
+<P>
+<STRONG>CGI::Seamstress</STRONG> is a Perl module which is substantially different in concept than
+HTML::Mason or HTML::Embperl, but largely equal in terms of functionality.
+CGI::Seamstress supplies all of the following:
+
+<UL>
+<LI><STRONG><A NAME="item_as">as it subclasses CGI.pm, all of its public API is available (in other
+words, there is no need to create a CGI object);</A></STRONG>
+<LI><STRONG><A NAME="item_cookie">cookie-based sessioning</A></STRONG>
+<LI><STRONG><A NAME="item_template">template-based form generation and error-checking</A></STRONG>
+<LI><STRONG><A NAME="item_DBIx">DBIx::Recordset-based database access</A></STRONG>
+</UL>
+<P>
+<STRONG>CGI::Seamstress</STRONG> works by having a CGI program (heretofore referred to as the Seamstress)
+generate an HTML file from a template file, which in the current
+implementation is nothing more than an HTML file with syntactic markup at
+places where Perl strings are supposed to be placed into the HTML file. 
+
+<P>
+Upon submission of the HTML file (by the user hitting a submit button), the
+action of the HTML file loops back to the Seamstress which then does error
+checking on the file. If any of the error checks fail, the form is
+redisplayed with a descriptive error message.
+
+<P>
+<HR>
+<H2><A NAME="INNER_WORKINGS">INNER WORKINGS</A></H2>
+<P>
+The bottom line of CGI::Seamstress is simple, yet elegant. Take a look at
+the following template file:
+
+<P>
+<PRE>        &lt;FORM ACTION=&quot;../bin/login.pl&quot;&gt;
+</PRE>
+<P>
+<PRE>        &lt;INPUT TYPE=TEXT NAME=email VALUE=%email%&gt; %email_Error%
+</PRE>
+<P>
+<PRE>        &lt;/FORM&gt;
+</PRE>
+<P>
+What the Seamstress (login.pl) does is take a hash (%Form) and fills in the
+values of the meta-html variables (email and email_Error in this case).
+When the form is first called, neither variable is defined so you get a
+blank text input field with no error message.
+
+<P>
+Should there be something wrong with this field (ie, it's blank and
+non-optional or the email address syntax is invalid), then when the form is
+resubmitted to the Seamstress, she simply fills in the error field and
+redisplays the form and the error message will pop up.
+
+<P>
+The process is the same for a form with multiple fields. The only thing
+necessary is each NAME-VALUE tag be unique
+
+<P>
+<HR>
+<H1><A NAME="API">API</A></H1>
+<P>
+<HR>
+<H2><A NAME="C_new_">&lt;CODE&gt;new()&lt;/CODE&gt;</A></H2>
+<P>
+The new method must be passed an anonymous hash. In this hash the key
+<CODE>Template_Directory</CODE> must be bound to the directory in which template files exist.
+
+<P>
+calling <CODE>new</CODE> does the following:
+
+<UL>
+<LI><STRONG><A NAME="item_insures">insures the method was called class-only not from an object</A></STRONG>
+<LI><STRONG><A NAME="item_binds">binds %::_Thread to the query data (this works for scalar
+values, I haven't tested it for non-scalars).</A></STRONG>
+<LI><STRONG><A NAME="item_insures">insures that the anonymous hash passed in bound
+Template_Directory</A></STRONG>
+</UL>
+<P>
+<HR>
+<H2><A NAME="C_Validate_Form_">&lt;CODE&gt;Validate_Form&lt;/CODE&gt;</A></H2>
+<P>
+This method is passed a reference to a hash to be filled in and an array
+with the names of optional fields.
+
+<P>
+This method is a bit wasteful right now because the query data is already
+in <CODE>%::_Thread</CODE>.
+
+<P>
+<HR>
+<H2><A NAME="C_Message_">&lt;CODE&gt;Message&lt;/CODE&gt;</A></H2>
+<P>
+This creates HTML error text. The fields will be discussed later. It would
+be more descriptive to pass in a hashref as opposed to a non-descript
+series of scalars.
+
+<P>
+<HR>
+<H2><A NAME="C_Validate_Email_Syntax_">&lt;CODE&gt;Validate_Email_Syntax&lt;/CODE&gt;</A></H2>
+<P>
+This method picks cherries from grapefruit trees in Guam.
+
+<P>
+<HR>
+<H2><A NAME="C_Display_">&lt;CODE&gt;Display&lt;/CODE&gt;</A></H2>
+<P>
+This re-displays the HTML template with the hash from <CODE>Validate_Form</CODE>
+bound to values of the template. Currently one must output the text/html
+header manually, but this will change.
+
+<P>
+<HR>
+<H2><A NAME="C_To_String_">&lt;CODE&gt;To_String&lt;/CODE&gt;</A></H2>
+<P>
+This is here because a prior programmer here didn't know about CGI.pm's
+<CODE>save_parameters</CODE> function.
+
+<P>
+<CODE>To_String()</CODE> takes all the key-value pairs of a CGI object and converts it to a CGI
+query string. Very useful for storing inside a cookie.
+
+<P>
+<HR>
+<H2><A NAME="C_Dump_Parms_">&lt;CODE&gt;Dump_Parms()&lt;/CODE&gt;</A></H2>
+<P>
+<CODE>Dump_Parms()</CODE> displays all the key-value pairs of a CGI object. It optionally takes a
+string which is the title of the debugging output stream.
+
+<P>
+Ie, <CODE>$S-</CODE><CODE>Dump_Parms(``bank</CODE> info cgi object'');&gt;
+
+<P>
+<HR>
+<H2><A NAME="C_Text_to_HTML_">&lt;CODE&gt;Text_to_HTML&lt;/CODE&gt;</A></H2>
+<P>
+This takes strings and replaces carriage returns with &lt;BR&gt;.
+
+<P>
+<HR>
+<H1><A NAME="RUNNING_THE_EXAMPLE">RUNNING THE EXAMPLE</A></H1>
+<P>
+On our systems, the example is at:
+
+<P>
+<A
+HREF="http://www.end70.com/terrence/CGI/Seamstress/html">http://www.end70.com/terrence/CGI/Seamstress/html</A>
+
+
+<P>
+Simply point your browser at html/index.html and mess with the form. Be
+sure to leave some fields blank as well mismatch the passwords and type an
+invalid email address. After awhile, enter all the fields correctly and you
+will
+
+<P>
+<HR>
+<H1><A NAME="TO_DO">TO DO</A></H1>
+<UL>
+<LI><STRONG><A NAME="item_sessioning">sessioning (HTML::EP supports sessioning through cookies, DBI,
+and MySQL) ... how many can I do?!</A></STRONG>
+<LI><STRONG><A NAME="item_error">error reporting currently dies which leads to internal server
+error pages... better to generate an error report page.</A></STRONG>
+<LI><STRONG><A NAME="item__S_To_Database_Table_Name_">$S-&gt;To_Database('Table_Name', \%Form);</A></STRONG>
+<P>
+This will insert or update the specified table with the form data via
+<CODE>DBIx::Recordset</CODE>.
+
+</UL>
+<P>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR</A></H1>
+<P>
+The original author of the templating and error-checkiing code is named
+Farhan and he does contract work in the Southern California area. The
+<CODE>To_String()</CODE> was authored by John who is somewhere in net-land.
+The <CODE>Dump_Parms(),</CODE> object-orientation and the rest was authored
+by me, Terrence Brannon (<A
+HREF="mailto:TBONE@CPAN.ORG">TBONE@CPAN.ORG</A>) I am the maintainer and
+extender of this code, so feel free to contact me when you have problems
+and suggestions. 
+
+<P>
+Salut.
+
+</BODY>
+
+</HTML>

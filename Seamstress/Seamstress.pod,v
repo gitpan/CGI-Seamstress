@@ -1,0 +1,136 @@
+head	1.2;
+access;
+symbols;
+locks
+	end70:1.2; strict;
+comment	@# @;
+
+
+1.2
+date	2000.03.02.00.10.01;	author end70;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2000.03.01.23.49.09;	author end70;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@=head1 NAME
+
+CGI::Seamstress - CGI extension with error checking and template support.
+
+=head1 SYNOPSIS
+
+use CGI::Seamstress;
+
+$cgi = CGI::Seamstress->new();
+
+... create templates and have CGI::Seamstress fill in values and check
+for errors and notify the user of errors when they occur.
+
+=cut
+
+=head1 DESCRIPTION
+
+B<CGI::Seamstress> is a Perl module, which adds error checking and
+template support for CGI.pm
+
+
+B<CGI::Seamstress> works by having a CGI program (heretofore referred
+to as the Seamstress) generate an HTML file from a template file,
+which in the current implementation is nothing more than an HTML file
+with syntactic markup at places where Perl strings are supposed to be
+placed into the HTML file. 
+
+Upon submission of the HTML file (by the user hitting a submit
+button), the action of the HTML file loops back to the Seamstress
+which then does error checking on the file. If any of the error checks
+fail, the form is redisplayed with a descriptive error message.
+
+=head2 INNER WORKINGS
+
+The bottom line of CGI::Seamstress is simple, yet elegant. Take a look
+at the following template file:
+
+	<FORM ACTION="../bin/login.pl">
+
+	<INPUT TYPE=TEXT NAME=email VALUE=%email%> %email_Error%
+
+	</FORM>
+
+What the Seamstress (login.pl) does is take a hash (%Form) and fills in the
+values of the meta-html variables (email and email_Error in this
+case). When the form is first called, neither variable is defined so
+you get a blank text input field with no error message.
+
+Should there be something wrong with this field (ie, it's blank and
+non-optional or the email address syntax is invalid), then when the
+form is resubmitted to the Seamstress, she simply fills in the error
+field and redisplays the form and the error message will pop up.
+
+The process is the same for a form with multiple fields. The only
+thing necessary is each NAME-VALUE tag be unique
+
+=cut
+
+=head1 ADDITIONAL FUNCTIONS
+
+=head2 C<to_string()>
+
+C<to_string()> takes all the key-value pairs of a CGI object and
+converts it to a CGI query string. Very useful for storing inside a
+cookie.
+
+=head2 C<dump_parms()>
+
+C<dump_parms()> displays all the key-value pairs of a CGI object. It
+optionally takes a string which is the title of the debugging output
+stream.
+
+Ie, $scgi->dump_parms("bank info cgi object");
+
+
+=head1 RUNNING THE EXAMPLE
+
+Simply point your browser at html/index.html and mess with the
+form. Be sure to leave some fields blank as well mismatch the
+passwords and type an invalid email address. After awhile, enter all
+the fields correctly and you will
+
+
+=head1 AUTHOR
+
+The original author of the templating and error-checkiing code is
+named Farhan and he does contract work in the Southern California
+area. The to_string() was authored by John Barrett who is somewhere in
+net-land. The dump_parms() was authored by me, Terrence Brannon
+(TBONE@@CPAN.ORG). I am the maintainer and extender of this code, so
+feel free to contact me when you have problems and suggestions.
+
+Salut.
+
+=cut
+
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d76 1
+a76 1
+=head RUNNING THE EXAMPLE
+@

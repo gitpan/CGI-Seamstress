@@ -1,0 +1,386 @@
+head	1.11;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.11
+date	2000.03.03.03.13.30;	author end70;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2000.03.03.03.12.35;	author end70;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2000.03.03.03.08.18;	author end70;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2000.03.02.05.28.26;	author end70;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2000.03.02.05.06.05;	author end70;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2000.03.02.04.39.51;	author end70;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2000.03.02.03.33.04;	author end70;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2000.03.02.03.05.46;	author end70;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2000.03.02.00.14.49;	author end70;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2000.03.01.22.07.30;	author end70;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2000.03.01.21.36.37;	author end70;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.11
+log
+@*** empty log message ***
+@
+text
+@#!/usr/bin/perl
+#
+
+#
+#----------------------------------------
+
+use CGI::Seamstress;
+
+warn 0;
+
+$S = CGI::Seamstress -> 
+    new(
+	{ Template_Directory 
+	      => "/usr/end70/mnt/admin/perl/CGI/Seamstress/templates"
+	      }
+	);
+
+warn 1;
+
+while (($k,$v) = each %::_Thread) {
+    warn " ::_Thread $k->$v ";
+}
+
+warn 2;    
+
+## Main Variables ## 
+
+my ($k,$v);
+
+my %Form;
+
+## Database Related Variables ##
+## Defining Templates ##
+
+
+#-----------------------------------------
+
+print $S->header();
+
+
+warn "A";
+
+### Build a hash ###
+@@fields = @@{$S->{'.parameters'}}; 
+@@optional_fields = ();
+foreach $field (@@fields) {
+    $Form{$field} = $S->{$field}[0];
+}
+
+warn "B";
+
+##############################
+# Display Initial Template   # 
+##############################
+if ($Form{'phase'}) {
+    warn "FORM PHASE";
+    $S->Display('login.tmpl', \%Form); 
+}
+
+warn "C";
+
+##############################
+# Validate Form Information  # 
+##############################
+($status, $err, @@err) = $S->Validate_Form(\%Form, @@optional_fields); 
+if (!$status) {
+    foreach $e (@@err) {
+	$t = "$e\_Error";
+	warn "storing error labeled $t";
+	$Form{$t} = $S->Message("Invalid", 'bold','0', 'C00000', '0') ;
+    }
+    $Form{'Message'} = $S->Message($err, 'bold','blink', 'ffffff', '1', 'C00000', 3, 350) ;
+    warn "here is the hash we pass to display:";
+    while (($k,$v) = each %Form) {
+	warn "$k->$v";
+    }
+    $S->Display('login.tmpl', \%Form); 
+}
+
+### Validating email address
+($status) = $S->Validate_Email_Syntax($Form{'email'});
+if ($status eq -1) {
+    $Form{'Message'} = $S->Message("Invalid Email Address", 'bold','blink', 'ffffff', '1', 'C00000', 3, 350) ;
+    $Form{'email_Error'} = $S->Message("Invalid", 'bold','0', 'C00000', '0') ;
+    $S->Display('login.tmpl', \%Form);
+}	
+
+### Validate if password and verify password fields match
+warn "password , verify_password: $Form{'password'} , $Form{'verify_password'}";
+if ($Form{'password'} ne $Form{'verify_password'}) {
+    $Form{'Message'} = $S->Message("Password Mismatched", 'bold','blink', 'ffffff', '1', 'C00000', 3, 350) ;
+    $Form{'password_Error'} = $S->Message("Mismatched", 'bold','0', 'C00000', '0') ;
+    $Form{'verify_password_Error'} = $S->Message("Mismatched", 'bold','0', 'C00000', '0') ;
+    $S->Display('login.tmpl', \%Form);
+
+} 
+
+
+#######################################
+# Obtain form information (function)
+#######################################
+
+#######################################
+# Validate form information (function) 
+#######################################
+
+#############################################
+# Insert info into temp database (function)
+#############################################
+
+################################################################
+### Once complete, insert info into end70 database (functin)   #
+################################################################
+
+##########################################
+#  Create Merchant account (function)    #
+##########################################
+
+#####################################
+#   Send email to user (function)   #
+#####################################
+
+
+$S->Display('login-successful.tmpl'); 
+
+
+
+1;
+@
+
+
+1.10
+log
+@*** empty log message ***
+@
+text
+@d85 1
+a85 1
+    $S->Display('login.tmpl');
+@
+
+
+1.9
+log
+@*** empty log message ***
+@
+text
+@d94 1
+a94 1
+    $S->Display('login.tmpl');
+@
+
+
+1.8
+log
+@*** empty log message ***
+@
+text
+@d11 6
+a16 2
+$S = 
+  CGI::Seamstress->new();
+d20 3
+a22 1
+$S->template_directory("/usr/end70/mnt/admin/perl/CGI/Seamstress/templates");
+a23 1
+    
+d37 2
+a38 2
+$query = new CGI;
+print $query->header();
+d44 1
+a44 1
+@@fields = @@{$query->{'.parameters'}}; 
+d47 1
+a47 1
+    $Form{$field} = $query->{$field}[0];
+d65 1
+a65 1
+($status, $err, @@err) = $S->Validate_Form_Info(\%Form, @@optional_fields); 
+d89 1
+@
+
+
+1.7
+log
+@*** empty log message ***
+@
+text
+@d23 2
+d64 1
+d68 4
+@
+
+
+1.6
+log
+@*** empty log message ***
+@
+text
+@d59 1
+a59 1
+if ($status eq -1) {
+d65 1
+a65 1
+    $S->Display('login.tmpl'); 
+@
+
+
+1.5
+log
+@*** empty log message ***
+@
+text
+@d9 2
+d12 8
+a19 1
+  CGI::Seamstress->new("/usr/end70/mnt/admin/perl/CGI/Seamstress/templates");
+d50 1
+a50 1
+    $S->Display('login.tmpl'); 
+@
+
+
+1.4
+log
+@*** empty log message ***
+@
+text
+@d9 2
+a10 1
+$S = CGI::Seamstress->new("/usr/end70/apache/htdocs/terrence/CGI/Seamstress/templates");
+@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@d9 1
+a9 1
+$S = CGI::Seamstress->new();
+d12 1
+a12 1
+$tmpl = "/usr/end70/apache/htdocs/terrence/CGI/Seamstress/templates";
+d23 3
+d33 1
+d39 1
+d42 2
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d9 1
+d35 1
+a35 1
+    Display('login.tmpl'); 
+d41 1
+a41 1
+($status, $err, @@err) = Validate_Form_Info(\%Form, @@optional_fields); 
+d45 1
+a45 1
+	$Form{$t} = Message("Invalid", 'bold','0', 'C00000', '0') ;
+d47 2
+a48 2
+    $Form{'Message'} = Message($err, 'bold','blink', 'ffffff', '1', 'C00000', 3, 350) ;
+    Display('login.tmpl'); 
+d52 1
+a52 1
+($status) = Validate_Email_Syntax($Form{'email'});
+d54 3
+a56 3
+    $Form{'Message'} = Message("Invalid Email Address", 'bold','blink', 'ffffff', '1', 'C00000', 3, 350) ;
+    $Form{'email_Error'} = Message("Invalid", 'bold','0', 'C00000', '0') ;
+    Display('login.tmpl');
+d61 4
+a64 4
+    $Form{'Message'} = Message("Password Mismatched", 'bold','blink', 'ffffff', '1', 'C00000', 3, 350) ;
+    $Form{'password_Error'} = Message("Mismatched", 'bold','0', 'C00000', '0') ;
+    $Form{'verify_password_Error'} = Message("Mismatched", 'bold','0', 'C00000', '0') ;
+    Display('login.tmpl');
+d94 1
+a94 1
+Display('login-successful.tmpl'); 
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@a6 1
+use lib '/usr/end70/mnt/admin/webs/end70/terrence/CGI/Seamstress';
+a95 13
+######################################################
+# 		Sub Routines 			      #
+######################################################
+sub Display {
+
+    my ($file) = @@_;
+    ($status, $err) = Fillin_Template("$tmpl/$file", \%Form);
+    if ($status eq -1) {
+	print "Error ($status)\n$err\n\n";
+	exit;
+    }
+    exit;
+}
+@
